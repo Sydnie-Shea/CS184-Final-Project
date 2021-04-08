@@ -27,7 +27,7 @@
 <body>
 
 <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2021</h1>
-<h1 align="middle">Fianl Project Proposal: Rendering Iridescent Materials</h1>
+<h1 align="middle">Fianl Project Proposal: Rendering Iridescent Materials with Spectral Ray Tracing</h1>
 <h2 align="middle">Sydnie Shea Cohen, Ada Hu, Eugene Lee, and Daniel Tseng</h2>
 
 <br><br>
@@ -39,7 +39,7 @@
 </p>
 
 <h2 align="middle">Problem Description</h2>
-<p>The problem we’re trying to solve is rendering iridescent images. We want to experiment with more materials - for example, in project 3 we implemented diffuse lighting, microfacet materials, and glassy materials and rendered these in a realistic fashion. However, in the final project we want to take it to the next step and implement iridescent microfacet materials and objects like soap bubbles, which we plan to achieve by applying the iridescent effects to objects that look like they are made of glass. The goal of this is to render these iridescent materials in a way that make them seem realistic.
+<p>The problem we’re trying to solve is rendering with spectral ray tracing and rendering iridescent images. We want to experiment with more materials - for example, in project 3 we implemented diffuse lighting, microfacet materials, and glassy materials and rendered these in a realistic fashion. However, in the final project we want to take it to the next step and implement iridescent microfacet materials and objects like soap bubbles, which we plan to achieve by applying the iridescent effects to objects that look like they are made of glass. The goal of this is to render these iridescent materials in a way that make them seem realistic. However, this will be challenging as our current rendering programs do not account for wavelengths, which is necessary to achieve our goals. There is also no use of thin film materail in the current code. Thus, we are going to have to introduce the ability to account for multiple wavelengths for each ray. We will also have to add thin film to pre-existing materials in order to create the appearance of an iridescent object. 
 </p>
 
 <h2 align="middle">Goals and Deliverables</h2>
@@ -109,7 +109,7 @@
 
 <h2 align="middle">Schedule</h2>
 <h3 align="left">Week 1</h3>
-<p>In the first week, we plan on doing more intense research on how to implement the elements needed to render iridescent photos. This includes having a better understanding of how we will use wavelengths in rendering the materials, we currently have support for. We also hope to gather a more complete understanding on the specifics for implementing the thin film to pre-exisiting materials. We also will begin refractoring the existing 3-1 and 3-2 in order to prepare for using wavelengths in the images we rendered. For every ray, we are going to be using three different wavelengths to determine how to color each pixel. We will also change the headers of the sample_f function and other functions in for the materials, so that the program will compile. However, at this stage we will not change the content of the functions at this stage.</p>
+<p>In the first week, we plan on doing more intense research on how to implement the elements needed to render iridescent photos. This includes having a better understanding of how we will use wavelengths in rendering the materials we currently have support for. We also hope to gather a more complete understanding on the specifics for implementing the thin film to pre-exisiting materials. We also will begin refractoring the existing 3-1 and 3-2 in order to prepare for using wavelengths in the images we rendered. For every ray, we are going to be using three different wavelengths to determine how to color each pixel. We will also change the headers of the sample_f function and other functions in for the materials, so that the program will compile. However, at this stage we will not change the content of the functions at this stage.</p>
 <h3 align="left">Week 2</h3>
 <p>In the second week, we plan to change material functions to have wavelength return values for reflectance. This will include refactoring code from projects 3-1/3-2 to make sure it takes into account light of three different wavelengths. Our understanding is that this shouldn't cause major changes in our picture as we are just massaging the code to be ready for the changes that we will make to the different surfaces we implement. </p>
 <h3 align="left">Week 3</h3>
