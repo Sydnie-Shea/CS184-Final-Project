@@ -32,32 +32,62 @@
 <div>
 
 <h2 align="middle">Summary</h2>
+<p>In our final project, we want to add spectral ray tracing to our project, which involves taking into account various wavelengths during the raytracing of the image. This will allow us to support iridescent materials when a thin film is added to prexisting materials. In particular, we plan to support iridescent metal and soap bubbles by adjusting microfacet and glass materials.
+</p>
 
 <h2 align="middle">Problem Description</h2>
+<p>The problem we’re trying to solve is rendering iridescent images. We want to experiment with more materials - for example, in project 3 we implemented diffuse lighting, microfacet materials, and glassy materials and rendered these in a realistic fashion. However, in the final project we want to take it to the next step and implement iridescent microfacet materials and objects like soap bubbles, which we plan to achieve by applying the iridescent effects to objects that look like they are made of glass. The goal of this is to render these iridescent materials in a way that make them seem realistic.
+</p>
 
 <h2 align="middle">Goals and Deliverables</h2>
 <h3 align="left">Image Goals</h3>
 
 <p>We plan on measuring the performance of our system by comparing the photos we manage to create with ones above and other images showing iridescence in photos.</p>
 <h3 align="left">Questions</h3>
+<p>We plan to analyze the rendering of different iridescent materials such as soap bubbles, metals, butterfly wings, etc. We will compare the different visual effects of these materials and how they affect the rest of our scene. We will also want to ask how the thin film causes differences when added to meicrofacet and glass materials. In addition, we want to ask how varying thickness (whether as a result of gravity or perlin noise) changes the scene. Finally, we also are asking how temperature can affect a scene.</p>
 <h3 align="left">What We Plan To Deliver</h3>
+<p>The main goal of our project is to render iridescent materials. In particular, we hope to create two new materials: iridescent materials and soap bubbles.</p>
+
+<p>However, in order to create iridescent materials, we also need to create adjustments to the way we currently execute ray tracing. In order to implent spectral ray tracing, we need to take into account wavelengths when tracing rays. Since humans have three color channels, we will need to take this into account when rendering our images. As a result, for every ray, we will take into account three wavelengths (one based on the normal distribution for blue wavelengths, one based on the normal distribution for red wavelengths, and one based on the normal distribution for green wavelengths).</p>
+
+<p>Since we are now accounting for wavelengths, we will have to adjust the functions for the pre-existing materials. We will adjust our formulas for BSDF for each material in order to take into account the wavelength which is passed in. We will use a wavelength-dependent BSDF funciton.</p>
+
+<p>Finally, we will actually introduce the capability for iridescent materials. We accomplish this by taking pre-existing materials and adding a thin film to the material. For thin film materials, the light will hit the film and reflect. However, it also will also refract into the film and reflect from within the film. Thus, we must account for the light reflect from both the air-film layer and the film-material layer when determining the value to return for the material's BSDF. We will add the thin film to the microfacet materials in order to create iridescent materials. Similarly, we will add a thin film to the glass in order to create the effects of a soap bubble. This will add iridescene to a clear sphere resembling soap bubbles.</p>
+
+<p>In addition to the affermentioned, we also hope to implement at least one additional feature. We have included information on the details of the additional features in the following section. Although we plan on doing at minimum one of these features, we haven't yet determined which feature will be most useful for our project.</p>
 <h3 align="left">What We Hope To Deliver</h3>
 <h4 align="left">Thickness</h4>
+<p>In order to create more realistic looking soap bubbles, we will add varying thickness to the iridescent glass material. We will make it such that that the thickness near the bottom of the bubble is thicker than the top of the bubble.</p>
 <h4 align="left">Perlin Noise</h4>
+<p>Another aspect that can be useful in rendering more realistic images is to take into account perlin noises. In real life, the thickness of the thin film is not standard across the material. Thus, we can use perlin noise to vary the thickness of the thin film realistically throughout the material.</p>
 <h4 align="left">Temperature</h4>
+<p>The project does not take into account the effects of the temperature of the scene. One additional feature, we are considering adding is the ability to support different temperatures within the scene.</p>
 <h4 align="left">Multiple Bounces In Thin Film</h4>
+<p>Currently our project only takes into account one bounce occuring within the thin film. However, in reality, the light will bounce multiple times within the thin film until it's energy is significantly lower. Thus, we would like to compare how taking into account multiple bounces in the thin film affects the realism of the image.</p>
 
 
 <h2 align="middle">Schedule</h2>
 <h3 align="left">Week 1</h3>
-<p>
+<p>In the first week, we plan on doing more intense research on how to implement the elements needed to render iridescent photos. This includes having a better understanding of how we will use wavelengths in rendering the materials, we currently have support for. We also hope to gather a more complete understanding on the specifics for implementing the thin film to pre-exisiting materials. We also will begin refractoring the existing 3-1 and 3-2 in order to prepare for using wavelengths in the images we rendered. For every ray, we are going to be using three different wavelengths to determine how to color each pixel. We will also change the headers of the sample_f function and other functions in for the materials, so that the program will compile. However, at this stage we will not change the content of the functions at this stage.</p>
 <h3 align="left">Week 2</h3>
+<p>In the second week, we plan to change material functions to have wavelength return values for reflectance. This will include refactoring code from projects 3-1/3-2 to make sure it takes into account light of three different wavelengths. Our understanding is that this shouldn't cause major changes in our picture as we are just massaging the code to be ready for the changes that we will make to the different surfaces we implement. </p>
 <h3 align="left">Week 3</h3>
+<p>Our goal for week 3 is to support two things: we want to support iridescent materials that are macro facet materials. This will allow us to render items like an iridescent bunny or dragon statue that would look realistic. We plan on implementing this by using the base microfacet effects and then adding the effects of the thin film. We also plan to support images that would result in a soap-bubble like effect. We plan on achieving this by adding the same thin film effect to the glass material. This would allow us to render iridescent soap bubbles on  files like CBSpheres file that we have seen in previous projects.
+</p>
 <h3 align="left">Week 4</h3>
-
+<p>The fourth week we have as a buffer week that we can use to pursue additional features if our project has gone smoothly. The importance of the buffer week is due to the unpredictability of debugging time. Project 3-1 taught us that a project with multiple moving parts is difficult and time consuming to debug, since there are so many places the bug could be. Thus, only if we managed to reach our previously set goals, will we focus on our extra aspects such as accounting for temperature, accounting for thickness due to gravity, accounting for noise when determining thickness, accounting for different number of bounces inside thin film, etc. Some of these additional features may be quick and easy to implement, but some may take significant additional time to create and debug, so these will remain features we hope to deliver but not guarantee.
+</p>
 <h2 align="middle">Resources</h2>
 <h3 align="left">Informational Resources</h3>
+<ul> <li><a href = “https://cs184.eecs.berkeley.edu/su20/lecture/17-8/color” >TEST</a></li>
+  <li><a href = “https://www-users.cs.umn.edu/~gmeyer/papers/gondek-meyer-siggraph-1994.pdf” >TEST</a></li>
+  <li><a href = “http://www.dgp.toronto.edu/~nmorris/CSC2530/Project/morris.pdf” >TEST</a></li>
+  <li><a href = “https://kwsong.github.io/cs184_final/final.html?fbclid=IwAR3U7PPWtlaK6opWgSM0fu-bwZeC5XR1CmKtOcCZqHuWqWPhYejnbh0qUSg” >TEST</a></li>
+  <li><a href = “https://ceciliavision.github.io/graphics/a6/?fbclid=IwAR2joUWNobrNQcqD5PhCcKaDjl84ui83VRlZsD8_HYFHuxTLv_KeWTpSojc#” >TEST</a></li>
+
+</ul>
 <h3 align="left">Technical Resources</h3>
+<p>We are planning to use project 3 as our base codebase. We decided to do this after a lot of debate because we were all familiar with it, and we saw from other reports that they also used the project 3 as a base. We know that this is possible, and it will avoid us having to start over in the middle of the project because our codebase is not compatible with the goals of our project. We will be using typical laptops for our hardware and coding using visual studio code/clion as we have for the previous projects in this class.</p>
 
 </body>
 </html>
